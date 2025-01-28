@@ -1,0 +1,14 @@
+img {
+  max-width: 100%;
+}
+
+.navbar-brand{
+  max-width: 10vw;
+}
+
+.moviecard .card-img-top,
+.peoplecard .card-img-top,
+.tvcard .card-img-top{
+  aspect-ratio: 9/13.5;
+  object-fit: cover;
+}
