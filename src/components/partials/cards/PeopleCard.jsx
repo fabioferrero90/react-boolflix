@@ -7,7 +7,7 @@ const PeopleCard = ({people}) => {
   }
 
   return (
-    <div className="peoplecard card col-4" style={cardStyle}>
+    <div className="peoplecard card col-3" style={cardStyle}>
       <img
       className="card-img-top"
       src={`https://image.tmdb.org/t/p/w342${people.profile_path}`}

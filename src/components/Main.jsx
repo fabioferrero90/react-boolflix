@@ -6,7 +6,7 @@ import PeopleResultSection from './partials/PeopleResultSection';
 
 const Main = () => {
 
-  const [ pageData, setPageData ] = useState({movies: [],tvs: [],peoples:[]});
+  const [ filteredData, setFilteredData ] = useState({movies: [],tvs: [],peoples:[]});
   const { results } = useDataContext();
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Main = () => {
           }
         }
       }
-      setPageData({
+      setFilteredData({
         movies: newMovies,
         tvs: newTvs,
         peoples: newPeoples
@@ -35,9 +35,9 @@ const Main = () => {
 
   return (
     <div className="container">
-      {pageData.movies.length >= 1 && <MovieResultSection movieList={pageData.movies} />}
-      {pageData.tvs.length >= 1 && <TVResultSection tvList={pageData.tvs} />}
-      {pageData.peoples.length >= 1 && <PeopleResultSection peopleList={pageData.peoples} />}
+      {filteredData.movies.length >= 1 && <MovieResultSection movieList={filteredData.movies} />}
+      {filteredData.tvs.length >= 1 && <TVResultSection tvList={filteredData.tvs} />}
+      {filteredData.peoples.length >= 1 && <PeopleResultSection peopleList={filteredData.peoples} />}
     </div>
   )
 }

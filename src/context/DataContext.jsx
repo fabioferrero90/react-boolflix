@@ -6,44 +6,57 @@ const DataContext = createContext();
 const DataProvider = ({children}) => {
 
   const api_key = import.meta.env.VITE_TMDB_API_KEY;
-  const base_api_url = 'https://api.themoviedb.org/3/search/multi';
-  const defaultparams = '&include_adult=false&language=it-IT';
   const [results, setResults] = useState([]);
-  const movieinfo_api_url = 'https://api.themoviedb.org/3/movie/';
   const [movieInfo, setMovieInfo] = useState([]);
-  const tvinfo_api_url = 'https://api.themoviedb.org/3/tv/';
   const [tvInfo, setTvInfo] = useState([]);
-  const genres_api_url = 'https://api.themoviedb.org/3/genre/movie/list';
   const [genres, setGenres] = useState([]);
+  const search_api_url = 'https://api.themoviedb.org/3/search/multi';
+  const movieinfo_api_url = 'https://api.themoviedb.org/3/movie/';
+  const tvinfo_api_url = 'https://api.themoviedb.org/3/tv/';
+  const genres_api_url = 'https://api.themoviedb.org/3/genre/movie/list';
+
+  const infoparams = {
+    api_key,
+    language: 'it-IT',
+  }
 
   useEffect(() => {
     fetchGenres();
   }, []);
 
   const fetchGenres = () => {
-    axios.get(`${genres_api_url}?api_key=${api_key}&language=it`) 
+    const params = {
+      api_key,
+      language: 'it'
+    }
+    axios.get(genres_api_url, {params}) 
     .then(res => {
       setGenres(res.data);
     })
   }
 
   const fetchData = (query) =>{
-    const endpoint = `${base_api_url}?api_key=${api_key}${defaultparams}&query=${query}`
-    axios.get(endpoint)
+    const params = {
+      api_key,
+      language: 'it-IT',
+      query,
+    }
+    axios.get(search_api_url, {params})
     .then(res => {
       setResults(res.data.results);
     })
   }
 
   const fetchMovieInfo = (movie_id) =>{
-    axios.get(`${movieinfo_api_url}${movie_id}?api_key=${api_key}&language=it-IT}`)
+    
+    axios.get(`${movieinfo_api_url}${movie_id}`, {infoparams})
     .then(res => {
       setMovieInfo(res.data);
     })
   }
 
   const fetchTvInfo = (tv_id) =>{
-    axios.get(`${tvinfo_api_url}${tv_id}?api_key=${api_key}&language=it-IT}`)
+    axios.get(`${tvinfo_api_url}${tv_id}`, {infoparams})
     .then(res => {
       setTvInfo(res.data);
     })

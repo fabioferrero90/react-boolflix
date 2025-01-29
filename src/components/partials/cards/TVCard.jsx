@@ -5,7 +5,7 @@ const TVCard = ({tv}) => {
   }
 
   return (
-    <div className="tvcard card col-4" style={cardStyle}>
+    <div className="tvcard card col-3" style={cardStyle}>
       <img 
       className="card-img-top"
       alt={tv.name} 
