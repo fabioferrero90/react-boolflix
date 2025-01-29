@@ -4,7 +4,7 @@ import DetailCard from './card/DetailCard';
 const MovieResultSection = ({movieList}) => {
   return (
     <div className="result-slider my-4">
-      <h4 className="pt-4">Film trovati: {movieList.length}</h4>
+      <h4 className="category-title pt-4">Film trovati: {movieList.length}</h4>
       <Swiper
         slidesPerView={3}
         spaceBetween={30}
@@ -13,7 +13,7 @@ const MovieResultSection = ({movieList}) => {
           clickable: true,
         }}
         modules={[FreeMode, Pagination]}
-        className="movieSwiper"
+        className="boolflixSwiper"
       >
         {movieList.map(movie => (
           <SwiperSlide key={movie.id}>

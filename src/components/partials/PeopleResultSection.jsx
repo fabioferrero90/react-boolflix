@@ -5,7 +5,7 @@ import DetailCard from './card/DetailCard';
 const PeopleResultSection = ({peopleList}) => {
   return (
     <div className="my-4">
-      <h4 className="pt-4">Persone trovate: {peopleList.length} </h4>
+      <h4 className="category-title pt-4">Persone trovate: {peopleList.length} </h4>
       <Swiper
         slidesPerView={3}
         spaceBetween={30}

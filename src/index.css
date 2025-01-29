@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
 img {
   max-width: 100%;
 }
@@ -11,7 +13,13 @@ body{
   max-width: 10vw;
 }
 
-.movieSwiper img{
+.category-title{
+  font-size:4rem;
+  font-family: 'Bebas Neue';
+  transform:translateX(-30px)
+}
+
+.boolflixSwiper img{
   aspect-ratio: 9/13.5;
   object-fit: cover;
 }
@@ -48,10 +56,13 @@ body{
   z-index:99;
   opacity:0;
   transition: all 0.3s ease;
+  transform:scale(0.85)
+
 }
 
 .swiperInfo:hover{
   opacity:1;
+  transform:scale(1.05)
 }
 
 .swiperInfo .langFlag {

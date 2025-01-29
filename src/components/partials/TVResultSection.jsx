@@ -6,7 +6,7 @@ const TVResultSection = ({tvList}) => {
 
   return (
     <div className="my-4">
-      <h4 className="pt-4">Serie TV trovate: {tvList.length}</h4>
+      <h4 className="category-title pt-4">Serie TV trovate: {tvList.length}</h4>
       <Swiper
         slidesPerView={3}
         spaceBetween={30}
@@ -15,7 +15,7 @@ const TVResultSection = ({tvList}) => {
           clickable: true,
         }}
         modules={[FreeMode, Pagination]}
-        className="movieSwiper"
+        className="boolflixSwiper"
       >
         {tvList.map(tv => (
           <SwiperSlide key={tv.id}>
