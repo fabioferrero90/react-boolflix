@@ -4,10 +4,10 @@ import axios from 'axios';
 import MovieResultSection from './partials/MovieResultSection';
 import TVResultSection from './partials/TVResultSection';
 import PeopleResultSection from './partials/PeopleResultSection';
-
+import HomePage from './HomePage';
 const Main = () => {
   const [filteredData, setFilteredData] = useState({ movies: [], tvs: [], peoples: [] });
-  const { formData, results } = useDataContext();
+  const { homePage, formData, results } = useDataContext();
   const api_key = import.meta.env.VITE_TMDB_API_KEY;
 
   useEffect(() => {
@@ -63,9 +63,15 @@ const Main = () => {
 
   return (
     <div className="resultPage mb-5 container">
-      {filteredData.movies.length >= 1 && <MovieResultSection movieList={filteredData.movies} />}
-      {filteredData.tvs.length >= 1 && <TVResultSection tvList={filteredData.tvs} />}
-      {filteredData.peoples.length >= 1 && <PeopleResultSection peopleList={filteredData.peoples} />}
+      {homePage ? (
+        <HomePage />
+      ) : (
+        <>
+          {filteredData.movies.length >= 1 && <MovieResultSection movieList={filteredData.movies} />}
+          {filteredData.tvs.length >= 1 && <TVResultSection tvList={filteredData.tvs} />}
+          {filteredData.peoples.length >= 1 && <PeopleResultSection peopleList={filteredData.peoples} />}
+        </>
+      )}
     </div>
   );
 };

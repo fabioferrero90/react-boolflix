@@ -9,6 +9,7 @@ const DataProvider = ({children}) => {
     search: ''
   };
   const [formData, setFormData] = useState(defaultFormData);
+  const [homePage, setHomePage] = useState(true);
 
   const api_key = import.meta.env.VITE_TMDB_API_KEY;
   const [results, setResults] = useState([]);
@@ -46,7 +47,6 @@ const DataProvider = ({children}) => {
       api_key,
       language: 'it-IT',
       query,
-      with_genres: genre !== 'all' ? genre : undefined,
     }
     axios.get(search_api_url, { params })
     .then(res => {
@@ -72,7 +72,7 @@ const DataProvider = ({children}) => {
   }
 
   return (
-    <DataContext.Provider value={{ formData, setFormData, results, fetchData, fetchMovieInfo, movieInfo, fetchTvInfo, tvInfo, fetchGenres, genres }}>
+    <DataContext.Provider value={{ homePage, setHomePage, formData, setFormData, results, fetchData, fetchMovieInfo, movieInfo, fetchTvInfo, tvInfo, fetchGenres, genres }}>
       {children}
     </DataContext.Provider>
   )
