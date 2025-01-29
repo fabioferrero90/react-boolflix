@@ -3,7 +3,7 @@ import { useDataContext } from '../context/DataContext';
 
 const Header = () => {
 
-  const { formData, setFormData, fetchData, genres } = useDataContext();
+  const { homePage, setHomePage, formData, setFormData, fetchData, genres } = useDataContext();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -11,15 +11,20 @@ const Header = () => {
   };
 
   const handleSubmit = (e) => {
+    if (formData.search === "") {
+      setHomePage(true)
+      return
+    }
     e.preventDefault();
     fetchData(formData.search);
+    setHomePage(false)
   };
 
   return (
     <nav className="navbar bg-body-tertiary" data-bs-theme="dark">
       <div className="d-flex justify-content-between container">
-        <a className="navbar-brand w-25">
-          <img className="ml-5 h-20" src="/BOOLFLIX.png" alt="logo" />
+        <a className="navbar-brand w-25" onClick={() => setHomePage(true)}>
+          <img className="ml-5 h-20" src="/BOOLFLIX.png" alt="logo"/>
         </a>
         <form className="d-flex w-50" role="search" onSubmit={handleSubmit}>
           <select

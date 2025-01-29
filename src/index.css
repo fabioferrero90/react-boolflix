@@ -11,6 +11,7 @@ body{
 
 .navbar-brand{
   max-width: 10vw;
+  cursor:pointer;
 }
 
 .category-title{
