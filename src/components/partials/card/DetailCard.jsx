@@ -19,12 +19,12 @@ const DetailCard = ({data, type}) => {
     cardData.title = data.title;
     cardData.img = `https://image.tmdb.org/t/p/w342/${data.poster_path}`;
     cardData.release = data.release_date.split("-")[0];
-    if (data.cast && data.cast.length > 0) {
-      cardData.cast = data.cast.slice(0, 5);  // Prendi solo i primi 5 attori
-    }
   }
 
   if (type === "tv" || type === "movie") {
+    if (data.cast && data.cast.length > 0) {
+      cardData.cast = data.cast.slice(0, 5);
+    }
     cardData.stars = Math.floor(data.vote_average / 2);
     cardData.overview = data.overview ? data.overview.substring(0, 200) + "..." : "";
   }
@@ -78,19 +78,22 @@ const DetailCard = ({data, type}) => {
             <p><strong>Riassunto: </strong><br />{cardData.overview}</p>
           )}
           {cardData.cast.length > 0 && (
-            <div className="cast flex justify-content-center">
-              {cardData.cast.map((actor, index) => (
-                actor.profile_path && (
-                  <img 
-                    key={index}
-                    className='actorImg'
-                    src={`https://image.tmdb.org/t/p/w45${actor.profile_path}`}
-                    alt={actor.name}
-                    title={actor.name}
-                  />
-                )
-              ))}
-            </div>
+            <>
+              <h3 className="text-center">Cast:</h3>
+              <div className="cast flex justify-content-center">
+                {cardData.cast.map((actor, index) => (
+                  actor.profile_path && (
+                    <img 
+                      key={index}
+                      className='actorImg'
+                      src={`https://image.tmdb.org/t/p/w45${actor.profile_path}`}
+                      alt={actor.name}
+                      title={actor.name}
+                    />
+                  )
+                ))}
+              </div>
+            </>
           )}
         </div>
       )} 

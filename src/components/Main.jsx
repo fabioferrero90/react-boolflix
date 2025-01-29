@@ -7,15 +7,15 @@ import PeopleResultSection from './partials/PeopleResultSection';
 
 const Main = () => {
   const [filteredData, setFilteredData] = useState({ movies: [], tvs: [], peoples: [] });
-  const { results } = useDataContext();
+  const { formData, results } = useDataContext();
   const api_key = import.meta.env.VITE_TMDB_API_KEY;
 
   useEffect(() => {
     const fetchData = async () => {
       if (results.length >= 1) {
-        const newMovies = results.filter(result => result.media_type === 'movie');
-        const newTvs = results.filter(result => result.media_type === 'tv');
-        const newPeoples = results.filter(result => result.media_type === 'person' && result.profile_path !== null);
+        const newMovies = (formData.category == 'all') ? results.filter(result => result.media_type === 'movie') : results.filter(result => result.media_type === 'movie' && result.genre_ids.includes(parseInt(formData.category)));
+        const newTvs = (formData.category == 'all') ? results.filter(result => result.media_type === 'tv') : results.filter(result => result.media_type === 'tv' && result.genre_ids.includes(parseInt(formData.category)));
+        const newPeoples = (formData.category == 'all') ? results.filter(result => result.media_type === 'person' && result.profile_path !== null) : [];
 
         if (newPeoples.length >= 1) {
           newPeoples.forEach(element => {
@@ -29,23 +29,32 @@ const Main = () => {
           });
         }
 
-        if (newMovies.length >= 1) {
-          const moviePromises = newMovies.map(movie => {
-            const params = { api_key };
-            return axios.get(`https://api.themoviedb.org/3/movie/${movie.id}/credits`, { params })
-              .then(res => {
-                const updatedMovie = { ...movie, cast: res.data.cast };
-                return updatedMovie;
-              });
-          });
+        const moviePromises = newMovies.map(movie => {
+          const params = { api_key };
+          return axios.get(`https://api.themoviedb.org/3/movie/${movie.id}/credits`, { params })
+            .then(res => {
+              const updatedMovie = { ...movie, cast: res.data.cast };
+              return updatedMovie;
+            });
+        });
 
-          const updatedMovies = await Promise.all(moviePromises);
-          setFilteredData({
-            movies: updatedMovies,
-            tvs: newTvs,
-            peoples: newPeoples,
-          });
-        }
+        const tvPromises = newTvs.map(tv => {
+          const params = { api_key };
+          return axios.get(`https://api.themoviedb.org/3/tv/${tv.id}/credits`, { params })
+            .then(res => {
+              const updatedTv = { ...tv, cast: res.data.cast };
+              return updatedTv;
+            });
+        });
+
+        const updatedMovies = await Promise.all(moviePromises);
+        const updatedTvs = await Promise.all(tvPromises);
+
+        setFilteredData({
+          movies: updatedMovies,
+          tvs: updatedTvs,
+          peoples: newPeoples,
+        });
       }
     };
 
