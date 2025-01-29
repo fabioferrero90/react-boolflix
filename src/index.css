@@ -2,13 +2,59 @@ img {
   max-width: 100%;
 }
 
+body{
+  background-color: black;
+  color:white;
+}
+
 .navbar-brand{
   max-width: 10vw;
 }
 
-.moviecard .card-img-top,
-.peoplecard .card-img-top,
-.tvcard .card-img-top{
+.movieSwiper img{
   aspect-ratio: 9/13.5;
   object-fit: cover;
+}
+
+.swiper-slide{
+  position:relative;
+}
+
+.swiperTitle{
+  background: rgb(28,28,28);
+  background: linear-gradient(180deg, rgba(28,28,28,1) 0%, rgba(28,28,28,0) 80%, rgba(21,21,21,0) 85%, rgba(0,0,0,0) 100%);  position:absolute;
+  top:0;
+  padding:20px;
+  color:white;
+  width:100%;
+  height:100%;
+  z-index:2;
+  font-size:1.8rem;
+}
+
+.swiperInfo{
+  position:absolute;
+  padding:30px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-direction: column;
+  align-items: center;
+  top:0;
+  width:100%;
+  height:100%;
+  background-color:black;
+  color:white;
+  z-index:99;
+  opacity:0;
+  transition: all 0.3s ease;
+}
+
+.swiperInfo:hover{
+  opacity:1;
+}
+
+.swiperInfo .langFlag {
+  width:20px;
+  aspect-ratio: 1;
 }

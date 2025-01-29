@@ -1,16 +1,26 @@
-import MovieCard from './cards/MovieCard'
-
-
+import { Swiper , SwiperSlide } from 'swiper/react'
+import { FreeMode, Pagination } from 'swiper/modules';
+import DetailCard from './card/DetailCard';
 const MovieResultSection = ({movieList}) => {
   return (
-    <div className="my-4">
-      <h1>Film trovati: {movieList.length}</h1>
-      <div className="row">
+    <div className="result-slider my-4">
+      <h4 className="pt-4">Film trovati: {movieList.length}</h4>
+      <Swiper
+        slidesPerView={3}
+        spaceBetween={30}
+        freeMode={true}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[FreeMode, Pagination]}
+        className="movieSwiper"
+      >
         {movieList.map(movie => (
-          <MovieCard key={movie.id} movie={movie} />
+          <SwiperSlide key={movie.id}>
+            <DetailCard data={movie} type="movie" />
+          </SwiperSlide>
         ))}
-      </div>
-      {/* <button type="button" class="btn btn-danger my-3">Mostra altro</button> */}
+      </Swiper>
     </div>
   )
 }

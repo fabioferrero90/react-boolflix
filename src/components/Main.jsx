@@ -13,7 +13,7 @@ const Main = () => {
     if (results.length >= 1) {
       const newMovies = results.filter(result => result.media_type == 'movie');
       const newTvs = results.filter(result => result.media_type == 'tv');
-      const newPeoples = results.filter(result => result.media_type == 'person');
+      const newPeoples = results.filter(result => result.media_type == 'person' && result.profile_path !== null);
       if (newPeoples.length >= 1) {
         for (const element of newPeoples) {
           for (const known of element.known_for) {
@@ -34,7 +34,7 @@ const Main = () => {
   }, [results])
 
   return (
-    <div className="container">
+    <div className="resultPage mb-5 container">
       {filteredData.movies.length >= 1 && <MovieResultSection movieList={filteredData.movies} />}
       {filteredData.tvs.length >= 1 && <TVResultSection tvList={filteredData.tvs} />}
       {filteredData.peoples.length >= 1 && <PeopleResultSection peopleList={filteredData.peoples} />}

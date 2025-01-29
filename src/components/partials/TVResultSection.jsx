@@ -1,17 +1,28 @@
-import TVCard from './cards/TVCard'
-
+import { Swiper , SwiperSlide } from 'swiper/react'
+import { FreeMode, Pagination } from 'swiper/modules';
+import DetailCard from './card/DetailCard';
 
 const TVResultSection = ({tvList}) => {
 
   return (
     <div className="my-4">
-      <h1>Serie TV trovate: {tvList.length}</h1>
-      <div className="row">
+      <h4 className="pt-4">Serie TV trovate: {tvList.length}</h4>
+      <Swiper
+        slidesPerView={3}
+        spaceBetween={30}
+        freeMode={true}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[FreeMode, Pagination]}
+        className="movieSwiper"
+      >
         {tvList.map(tv => (
-          <TVCard key={tv.id} tv={tv} />
+          <SwiperSlide key={tv.id}>
+            <DetailCard key={tv.id} data={tv} type="tv" />
+          </SwiperSlide>
         ))}
-      </div>
-      {/* <button type="button" class="btn btn-danger my-3">Mostra altro</button> */}
+      </Swiper>
     </div>
   )
 }
