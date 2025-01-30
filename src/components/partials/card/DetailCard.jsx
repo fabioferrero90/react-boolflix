@@ -63,7 +63,8 @@ const DetailCard = ({data, type}) => {
         </div>
       ) : (
         <div className="swiperInfo">
-          <div className="stars">
+          <div className="stars mb-3 text-center">
+            <p className="mb-0"><strong>Valutazione:</strong></p>
             {Array.from({ length: 5 }).map((_, i) => (
               i < cardData.stars ? <FaStar key={i} /> : <FaRegStar key={i} />
             ))}
