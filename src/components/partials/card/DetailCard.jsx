@@ -1,6 +1,6 @@
 import React from 'react';
 import { SwiperSlide } from 'swiper/react';
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaRegStar } from "react-icons/fa";
 
 const DetailCard = ({data, type}) => {
   const cardData = {
@@ -64,8 +64,8 @@ const DetailCard = ({data, type}) => {
       ) : (
         <div className="swiperInfo">
           <div className="stars">
-            {Array.from({ length: cardData.stars }).map((_, i) => (
-              <FaStar key={i} />
+            {Array.from({ length: 5 }).map((_, i) => (
+              i < cardData.stars ? <FaStar key={i} /> : <FaRegStar key={i} />
             ))}
           </div>
           <div className="text-center">
